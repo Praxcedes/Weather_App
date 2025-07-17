@@ -1,6 +1,6 @@
 # Weather_App
 
-A simple and user-friendly weather application that provides real-time weather information for any city worldwide. Built with modern web technologies, Weather_App helps users stay updated on current weather conditions, forecasts, and more.
+A simple  weather application that provides real-time weather information for any city worldwide. Built with modern web technologies, Weather_App helps users stay updated on current weather conditions, forecasts, and more.
 
 ## Features
 
@@ -46,7 +46,7 @@ A simple and user-friendly weather application that provides real-time weather i
 npm start
 ```
 
-The app will be available at [http://localhost:3000](http://localhost:3000).
+The app will be available at [http://localhost:3000].
 
 ## Usage
 
