@@ -44,8 +44,6 @@ A simple and user-friendly weather application that provides real-time weather i
 
 ```bash
 npm start
-# or
-yarn start
 ```
 
 The app will be available at [http://localhost:3000](http://localhost:3000).
