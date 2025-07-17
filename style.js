@@ -43,14 +43,19 @@ function displayWeather(data, cityName, countryCode) {
   document.getElementById("errorMessage").classList.add("hidden");
 
   const weather = data.current_weather;
-  const humidity = data.hourly.relativehumidity_2m[0]; // Added humidity (first hour)
+  const humidity = data.hourly.relativehumidity_2m[0];
+
+  // 🌟 Get weather code for description and icon
+  const weatherCode = weather.weathercode;
+  const weatherInfo = getWeatherDescriptionAndIcon(weatherCode);
 
   weatherDisplay.innerHTML = `
     <div class="weather-card">
       <h3>${cityName}, ${countryCode}</h3>
-      <img src="https://cdn-icons-png.flaticon.com/512/1116/1116453.png" width="60" />
+      <img src="${weatherInfo.icon}" alt="${weatherInfo.description}" width="60" />
+      <p><strong>Description:</strong> ${weatherInfo.description}</p>
       <p><strong>Temp:</strong> ${weather.temperature}°C</p>
-      <p><strong>Humidity:</strong> ${humidity}%</p> <!-- Added humidity -->
+      <p><strong>Humidity:</strong> ${humidity}%</p>
       <p><strong>Wind:</strong> ${weather.windspeed} m/s</p>
       <p><strong>Time:</strong> ${weather.time}</p>
       <div class="button-group">
@@ -79,3 +84,22 @@ function showError(message) {
   weatherDisplay.innerHTML = "";
 }
 
+// 🌟 Map weather codes to descriptions and icons
+function getWeatherDescriptionAndIcon(code) {
+  const weatherMap = {
+    0: { description: "Clear sky", icon: "https://cdn-icons-png.flaticon.com/512/869/869869.png" },
+    1: { description: "Mainly clear", icon: "https://cdn-icons-png.flaticon.com/512/1163/1163661.png" },
+    2: { description: "Partly cloudy", icon: "https://cdn-icons-png.flaticon.com/512/1163/1163624.png" },
+    3: { description: "Overcast", icon: "https://cdn-icons-png.flaticon.com/512/414/414825.png" },
+    45: { description: "Fog", icon: "https://cdn-icons-png.flaticon.com/512/4005/4005901.png" },
+    48: { description: "Depositing rime fog", icon: "https://cdn-icons-png.flaticon.com/512/4005/4005901.png" },
+    51: { description: "Light drizzle", icon: "https://cdn-icons-png.flaticon.com/512/4150/4150897.png" },
+    61: { description: "Slight rain", icon: "https://cdn-icons-png.flaticon.com/512/414/414974.png" },
+    71: { description: "Slight snow fall", icon: "https://cdn-icons-png.flaticon.com/512/642/642102.png" },
+    80: { description: "Rain showers", icon: "https://cdn-icons-png.flaticon.com/512/1163/1163624.png" },
+    95: { description: "Thunderstorm", icon: "https://cdn-icons-png.flaticon.com/512/1146/1146869.png" },
+    // ... you can add more mappings from Open-Meteo codes
+  };
+
+  return weatherMap[code] || { description: "Unknown", icon: "https://cdn-icons-png.flaticon.com/512/252/252035.png" };
+}
