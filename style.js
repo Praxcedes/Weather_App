@@ -26,7 +26,7 @@ function getWeather(city) {
       }
 
       const { latitude, longitude, name, country } = geoData.results[0];
-      const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
+      const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&hourly=relativehumidity_2m`;
 
       return fetch(weatherUrl)
         .then(response => response.json())
@@ -43,12 +43,14 @@ function displayWeather(data, cityName, countryCode) {
   document.getElementById("errorMessage").classList.add("hidden");
 
   const weather = data.current_weather;
+  const humidity = data.hourly.relativehumidity_2m[0]; // Added humidity (first hour)
 
   weatherDisplay.innerHTML = `
     <div class="weather-card">
       <h3>${cityName}, ${countryCode}</h3>
       <img src="https://cdn-icons-png.flaticon.com/512/1116/1116453.png" width="60" />
       <p><strong>Temp:</strong> ${weather.temperature}°C</p>
+      <p><strong>Humidity:</strong> ${humidity}%</p> <!-- Added humidity -->
       <p><strong>Wind:</strong> ${weather.windspeed} m/s</p>
       <p><strong>Time:</strong> ${weather.time}</p>
       <div class="button-group">
@@ -76,3 +78,4 @@ function showError(message) {
 
   weatherDisplay.innerHTML = "";
 }
+
