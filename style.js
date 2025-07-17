@@ -45,7 +45,7 @@ function displayWeather(data, cityName, countryCode) {
   const weather = data.current_weather;
   const humidity = data.hourly.relativehumidity_2m[0];
 
-  // 🌟 Get weather code for description and icon
+  //  Get weather code for description and icon
   const weatherCode = weather.weathercode;
   const weatherInfo = getWeatherDescriptionAndIcon(weatherCode);
 
@@ -84,7 +84,7 @@ function showError(message) {
   weatherDisplay.innerHTML = "";
 }
 
-// 🌟 Map weather codes to descriptions and icons
+//  Map weather codes to descriptions and icons
 function getWeatherDescriptionAndIcon(code) {
   const weatherMap = {
     0: { description: "Clear sky", icon: "https://cdn-icons-png.flaticon.com/512/869/869869.png" },
@@ -98,7 +98,7 @@ function getWeatherDescriptionAndIcon(code) {
     71: { description: "Slight snow fall", icon: "https://cdn-icons-png.flaticon.com/512/642/642102.png" },
     80: { description: "Rain showers", icon: "https://cdn-icons-png.flaticon.com/512/1163/1163624.png" },
     95: { description: "Thunderstorm", icon: "https://cdn-icons-png.flaticon.com/512/1146/1146869.png" },
-    // ... you can add more mappings from Open-Meteo codes
+  
   };
 
   return weatherMap[code] || { description: "Unknown", icon: "https://cdn-icons-png.flaticon.com/512/252/252035.png" };
