@@ -65,16 +65,22 @@ function displayWeather(data, cityName, countryCode) {
     </div>
   `;
 
-  // Add functionality to Delete button
-  document.getElementById("deleteBtn").addEventListener("click", function () {
-    weatherDisplay.innerHTML = ""; // Clear the displayed weather
-  });
-
   // Add functionality to Edit button
-  document.getElementById("editBtn").addEventListener("click", function () {
+weatherDisplay.addEventListener("click", function (e) {
+  if (e.target && e.target.id === "editBtn") {
     cityInput.value = cityName; // Pre-fill input with current city
     cityInput.focus();          // Focus input field for editing
-  });
+  }
+});
+
+// Add functionality to Delete button
+weatherDisplay.addEventListener("click", function (e) {
+  if (e.target && e.target.id === "deleteBtn") {
+    weatherDisplay.innerHTML = ""; // Clear the displayed weather
+  }
+});
+
+
 }
 
 function showError(message) {

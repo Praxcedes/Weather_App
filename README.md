@@ -16,25 +16,12 @@ A simple  weather application that provides real-time weather information for an
 No installation required!  
 Just  download the project and open `index.html` in your browser.  
 
-### Prerequisites
-
-- [Node.js]
-- [npm]
-
-
-### Running the App
-
-```bash
-npm start
-```
-
-The app will be available at [http://localhost:3000].
 
 ## Usage
 
 1. Enter a city name in the search bar.
 2. View the current weather and forecast.
-3. Switch between metric and imperial units (if supported).
+3. You can delet or edit the weather.
 
 ## Technologies Used
 
