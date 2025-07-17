@@ -1,54 +1,63 @@
-const apiKey = "YOUR_API_KEY"; // Replace with your OpenWeatherMap API key
+const API_KEY = "YOUR_OWN_API_KEY"; // Replace with your OpenWeatherMap API key
+const BASE_URL = "https://api.open-meteo.com/v1/forecast?latitude=-1.2833&longitude=36.8167&hourly=temperature_2m"
+
 const weatherForm = document.getElementById("weatherForm");
 const cityInput = document.getElementById("cityInput");
 const weatherDisplay = document.getElementById("weatherDisplay");
 const errorMessage = document.getElementById("errorMessage");
 
-weatherForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const city = cityInput.value.trim();
-  if (city) {
+document.getElementById("weatherForm").addEventListener("submit", function (e) {
+  e.preventDefault(); // prevent form from reloading the page
+
+  const city = document.getElementById("cityInput").value.trim();
+  if (city !== "") {
     getWeather(city);
   }
 });
 
-async function getWeather(city) {
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
-    city
-  )}&appid=${apiKey}&units=metric`;
+function getWeather(city) {
+  const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1`;
 
-  weatherDisplay.classList.add("hidden");
-  errorMessage.classList.add("hidden");
+  fetch(geoUrl)
+    .then(response => response.json())
+    .then(geoData => {
+      if (!geoData.results || geoData.results.length === 0) {
+        throw new Error("City not found.");
+      }
 
-  try {
-    const response = await fetch(apiUrl);
-    if (!response.ok) {
-      throw new Error("City not found");
-    }
+      const { latitude, longitude, name, country } = geoData.results[0];
+      const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
 
-    const data = await response.json();
-    displayWeather(data);
-  } catch (error) {
-    showError(error.message);
-  }
+      return fetch(weatherUrl).then(response => response.json()).then(weatherData => {
+        displayWeather(weatherData, name, country,latitude,longitude);
+      });
+    })
+    .catch(error => {
+      showError(error.message);
+    });
 }
 
-function displayWeather(data) {
-  const { name, sys, main, weather, wind } = data;
-  const iconUrl = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
+function displayWeather(data, cityName, countryCode) {
+  document.getElementById("errorMessage").classList.add("hidden");
+
+  const weather = data.current_weather;
+  const weatherDisplay = document.getElementById("weatherDisplay");
 
   weatherDisplay.innerHTML = `
-    <h2>${name}, ${sys.country}</h2>
-    <img src="${iconUrl}" alt="${weather[0].description}">
-    <p><strong> Temperature:</strong> ${main.temp}°C</p>
-    <p><strong> Weather:</strong> ${weather[0].description}</p>
-    <p><strong> Humidity:</strong> ${main.humidity}%</p>
-    <p><strong> Wind Speed:</strong> ${wind.speed} m/s</p>
+    <div class="weather-card">
+      <h3>${cityName}, ${countryCode}</h3>
+      <img src="https://cdn-icons-png.flaticon.com/512/1116/1116453.png" width="60" />
+      <p><strong>Temp:</strong> ${weather.temperature}°C</p>
+      <p><strong>Wind:</strong> ${weather.windspeed} m/s</p>
+      <p><strong>Time:</strong> ${weather.time}</p>
+    </div>
   `;
-  weatherDisplay.classList.remove("hidden");
 }
 
 function showError(message) {
-  errorMessage.textContent = ` ${message}`;
+  const errorMessage = document.getElementById("errorMessage");
+  errorMessage.textContent = message;
   errorMessage.classList.remove("hidden");
+
+  document.getElementById("weatherDisplay").innerHTML = "";
 }
