@@ -69,17 +69,12 @@ function displayWeather(data, cityName, countryCode) {
 weatherDisplay.addEventListener("click", function (e) {
   if (e.target && e.target.id === "editBtn") {
     cityInput.value = cityName; // Pre-fill input with current city
-    cityInput.focus();          // Focus input field for editing
+    cityInput.focus();          // Focus on input for editing
   }
 });
 
-// Add functionality to Delete button
-weatherDisplay.addEventListener("click", function (e) {
-  if (e.target && e.target.id === "deleteBtn") {
-    weatherDisplay.innerHTML = ""; // Clear the displayed weather
-  }
-});
 
+});
 
 }
 

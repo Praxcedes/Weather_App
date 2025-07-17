@@ -10,6 +10,10 @@ A simple  weather application that provides real-time weather information for an
 -  Responsive and clean UI  
 -  Error handling for invalid city names or API/network issues
 
+## Live Demo
+
+[View the Live App Here](https://praxcedes-kabeya.github.io/weather-app/)  
+
 
 ## Getting Started
 
