@@ -33,8 +33,6 @@ A simple and user-friendly weather application that provides real-time weather i
 2. Install dependencies:
     ```bash
     npm install
-    # or
-    yarn install
     ```
 
 3. Obtain a free API key from [OpenWeatherMap](https://openweathermap.org/api) and add it to your environment variables:
