@@ -73,7 +73,11 @@ weatherDisplay.addEventListener("click", function (e) {
   }
 });
 
-
+// Add functionality to Delete button
+weatherDisplay.addEventListener("click", function (e) {
+  if (e.target && e.target.id === "deleteBtn") {
+    weatherDisplay.innerHTML = ""; // Clear the displayed weather
+  }
 });
 
 }
