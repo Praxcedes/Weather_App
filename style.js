@@ -51,7 +51,6 @@ function displayWeather(data, cityName, countryCode) {
       <p><strong>Temp:</strong> ${weather.temperature}°C</p>
       <p><strong>Wind:</strong> ${weather.windspeed} m/s</p>
       <p><strong>Time:</strong> ${weather.time}</p>
-      <p><strong>Wind:</strong> ${weather.windspeed} m/s</p
       <div class="button-group">
         <button id="editBtn">Edit</button>
         <button id="deleteBtn">Delete</button>
