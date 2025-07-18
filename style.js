@@ -1,4 +1,4 @@
-const API_KEY = "YOUR_OWN_API_KEY"; // Replace with your OpenWeatherMap API key
+const API_KEY = "YOUR_OWN_API_KEY"; 
 const BASE_URL = "https://api.open-meteo.com/v1/forecast?latitude=-1.2833&longitude=36.8167&hourly=temperature_2m";
 
 const weatherForm = document.getElementById("weatherForm");

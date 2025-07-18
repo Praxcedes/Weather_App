@@ -8,11 +8,7 @@ A simple  weather application that provides real-time weather information for an
 -  Display current temperature, humidity, wind speed, and weather description  
 -  Show weather icon based on real conditions  
 -  Responsive and clean UI  
--  Error handling for invalid city names or API/network issues
-
-## Live Demo
-
-[View the Live App Here](https://praxcedes-kabeya.github.io/weather-app/)  
+-  Error handling for invalid city names or API/network issues.
 
 
 ## Getting Started
