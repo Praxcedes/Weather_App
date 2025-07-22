@@ -25,10 +25,9 @@ Just  download the project and open `index.html` in your browser.
 
 ## Technologies Used
 
-- React.js (or specify your framework)
-- OpenWeatherMap API
-- CSS3 / Bootstrap (choose your styling tech)
-- Fetch API
+- Index.html
+- style.css
+- style.js
 
 ## Contributing
 
